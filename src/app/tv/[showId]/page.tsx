@@ -135,8 +135,6 @@ const Page = ({ params, searchParams }: PageProps) => {
   const streamChangeHandler = async () => {
     try {
       if (!media || !media.tmdbId) return;
-      console.log(showDetails);
-      console.log("running all");
       const output = await providers.runAll({
         media: {
           type: "show",
@@ -159,7 +157,6 @@ const Page = ({ params, searchParams }: PageProps) => {
 
       if (output !== null) {
         setVideoUrl(output);
-        console.log(output);
       }
     } catch (err) {
       console.error(err);

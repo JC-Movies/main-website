@@ -45,9 +45,7 @@ function VideoPlayer({
   episodes?: any[];
 }) {
   const player = useRef<MediaPlayerInstance>(null);
-  console.log(src);
   const strm = src.stream[0] || src.stream;
-  console.log(strm);
   const [visible, setVisible] = useState(false);
   const languages = isoLangs;
 

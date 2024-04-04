@@ -69,8 +69,6 @@ const Page = ({ params }: PageProps) => {
   }, [media]);
   const streamChangeHandler = async () => {
     try {
-        console.log(showDetails);
-        console.log("running all");
         const output = await providers.runAll({
           media: {
             type: "movie",
@@ -84,7 +82,6 @@ const Page = ({ params }: PageProps) => {
 
         if (output !== null) {
           setVideoUrl(output);
-          console.log(output);
         }
     } catch (err) {
       console.log(err);
