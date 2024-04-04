@@ -1,11 +1,10 @@
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/U6U8WFUVX) 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/U6U8WFUVX)
+
 # JC-Movies
 
 JC-Movies is an open-source project created with Next.js to provide users with a platform to discover and explore movies. This README provides an overview of the project, installation instructions, usage guidelines, and contribution guidelines.
 
-
-## 
-
+##
 
 ## Table of Contents
 
@@ -81,15 +80,14 @@ Please ensure that your code adheres to the existing code style and that you hav
 
 ## Donations
 
-JC-Movies is provided free of charge and is ad-free. If you find this project helpful, please consider supporting its development by donating through [Ko-Fi](https://ko-fi.com/U6U8WFUVX){:target="_blank"} :.
+JC-Movies is provided free of charge and is ad-free. If you find this project helpful, please consider supporting its development by donating through [Ko-Fi](https://ko-fi.com/U6U8WFUVX).
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/U6U8WFUVX){:target="_blank"}:
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/U6U8WFUVX)
 
 ## Technologies Used
 
-- [**@movie-web/providers**](https://movie-web.github.io/providers/){:target="_blank"}: : This package enables JC-Movies to fetch movie data from third party providers without the need to store any media files or copyrighted content locally.
-- [**Vidstack (Video Player)**](https://vidstack.io/){:target="_blank"}: : A video player library used for smooth video playback and streaming experience.
-
+- [**@movie-web/providers**](https://movie-web.github.io/providers/): This package enables JC-Movies to fetch movie data from third party providers without the need to store any media files or copyrighted content locally.
+- [**Vidstack (Video Player)**](https://vidstack.io/): A video player library used for smooth video playback and streaming experience.
 
 ## License
 
