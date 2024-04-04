@@ -7,9 +7,9 @@ export default async function handler(
   ) {
   const { method, headers, body } = req;
   const parsedUrl = url.parse(req.url, true); // Parse URL
-  // const referrer = new URL(req.headers.referer || "");
-  // if(!referrer || !referrer.host) return res.status(401).json({ error: "Unauthorized" });
-  // if(![referrer.host, referrer.hostname, referrer.origin].includes(process.env.NEXT_PUBLIC_BASEURL!)) return res.status(401).json({ error: "Unauthorized" });
+  const referrer = new URL(req.headers.referer || "");
+  if(!referrer || !referrer.host) return res.status(401).json({ error: "Unauthorized" });
+  if(![referrer.host, referrer.hostname, referrer.origin].includes(process.env.NEXT_PUBLIC_BASEURL!)) return res.status(401).json({ error: "Unauthorized" });
   const destination = parsedUrl.query.destination; // Extract query parameter
 
   try {

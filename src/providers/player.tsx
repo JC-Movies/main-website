@@ -25,6 +25,7 @@ import {
 import { CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BackgroundGradient } from "@/components/ui/bg-gradient";
+import axios from "axios";
 function VideoPlayer({
   src,
   details,
@@ -46,8 +47,10 @@ function VideoPlayer({
 }) {
   const player = useRef<MediaPlayerInstance>(null);
   const strm = src.stream[0] || src.stream;
+
   const [visible, setVisible] = useState(false);
   const languages = isoLangs;
+  const captions = ["en", "ar", "fr", "es", "nl", "de"]//Object.keys(languages).map((code) => code);
 
   const handleSeasonChange = (seasonNumber: string) => {
     if (!onSeasonChange) return;
@@ -64,6 +67,9 @@ function VideoPlayer({
     return language ? language.name : "Unknown";
   }
   useEffect(() => {
+    player.current?.textTracks;
+  }, [selectedEpisode, selectedSeason]);
+  useEffect(() => {
     const timeChecker = setInterval(() => {
       const currentTime = player.current?.currentTime || 0;
       const duration = player.current?.duration || 0;
@@ -77,7 +83,6 @@ function VideoPlayer({
 
     return () => clearInterval(timeChecker);
   }, [!visible]);
-
   function nextEpHandler() {
     if (!episodes) return;
     if (!seasons) return;
@@ -108,16 +113,26 @@ function VideoPlayer({
         autoPlay
       >
         <MediaProvider />
-        {strm.captions &&
-          strm.captions.map((caption: any) => (
+        {captions &&
+          captions.map((caption: any) => (
             <Track
-              key={caption.language}
+              key={caption}
               label={
-                convertLanguageCodeToName(caption.language) || caption.language
+                convertLanguageCodeToName(caption) || caption
               }
-              language={caption.language}
-              src={caption.url}
+              language={caption}
+              src={
+                caption.url ||
+                `/api/subtitles?query=${details.title
+                  .split("-")[0].trim()
+                  .toLowerCase()}&tmdbId=${
+                  details?.id
+                }&season=${selectedSeason}&episode=${selectedEpisode}&language=${
+                  caption
+                }`
+              }
               kind="captions"
+              type={"srt"}
             />
           ))}
         <Poster
@@ -139,8 +154,8 @@ function VideoPlayer({
                 <SeekForward10Icon className="w-8 h-8" />
               </SeekButton>
             ),
-            topControlsGroupStart: (
-              episodes && <div>
+            topControlsGroupStart: episodes && (
+              <div>
                 <Menu.Root>
                   <Menu.Button
                     className="vds-menu-button vds-button"
@@ -160,17 +175,15 @@ function VideoPlayer({
                       {seasons?.map(({ season_number }) => (
                         <Menu.Radio
                           className={`vds-radio`}
-                          value={season_number }
+                          value={season_number}
                           onSelect={() =>
-                            handleSeasonChange(
-                              Number(season_number ).toString()
-                            )
+                            handleSeasonChange(Number(season_number).toString())
                           }
-                          key={season_number }
+                          key={season_number}
                         >
                           <CheckCircle className="vds-icon" />
                           <span className="vds-radio-label">
-                            Season {season_number }
+                            Season {season_number}
                           </span>
                         </Menu.Radio>
                       ))}
@@ -211,16 +224,20 @@ function VideoPlayer({
                 </Menu.Root>
               </div>
             ),
-            afterCaptions: visible ? (
-              episodes && <div className="absolute bottom-[5rem] right-5 z-10">
-                <BackgroundGradient>
-                <Button className="bg-transparent hover:bg-slate-700/80 rounded-3xl" onClick={nextEpHandler}>
-                  Next Episode
-                </Button>
-              </BackgroundGradient>
-              </div>
-              
-            ) : null,
+            afterCaptions: visible
+              ? episodes && (
+                  <div className="absolute bottom-[5rem] right-5 z-10">
+                    <BackgroundGradient>
+                      <Button
+                        className="bg-transparent hover:bg-slate-700/80 rounded-3xl"
+                        onClick={nextEpHandler}
+                      >
+                        Next Episode
+                      </Button>
+                    </BackgroundGradient>
+                  </div>
+                )
+              : null,
           }}
           icons={defaultLayoutIcons}
           download={

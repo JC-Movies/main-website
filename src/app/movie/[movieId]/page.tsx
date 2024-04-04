@@ -61,6 +61,7 @@ const Page = ({ params }: PageProps) => {
       document.title = `${showDetails.title} - ${parseInt(
         showDetails.release_date.substring(0, 4)
       )}`;
+      console.log(showDetails);
       mediaChangeHandler();
     }
   }, [showDetails]);
@@ -77,7 +78,8 @@ const Page = ({ params }: PageProps) => {
             imdbId: showDetails.external_ids.imdb_id,
             tmdbId: showDetails.id,
           },
-          sourceOrder: ["primewire", "vidsrcto"],
+          sourceOrder: ["vidsrc","flixhq"],
+        // embedOrder: ["voe", "streamvid"],
         });
 
         if (output !== null) {
