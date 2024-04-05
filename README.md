@@ -50,8 +50,8 @@ To run JC-Movies locally, follow these steps:
 
    ```
    NEXT_PUBLIC_BASEURL=http://localhost:3000
-   NEXT_PUBLIC_APIKEY="Your TMDB API KEY"
-   NEXT_PUBLIC_API_TOKEN="Your TMDB TOKEN"
+   NEXT_PUBLIC_APIKEY=Your TMDB API KEY
+   NEXT_PUBLIC_API_TOKEN=Your TMDB TOKEN
    ```
 
 5. Run the development server:
