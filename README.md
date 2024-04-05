@@ -42,10 +42,11 @@ To run JC-Movies locally, follow these steps:
 3. Install dependencies:
 
    ```
-   pnpm install
+   npm install or pnpm install
    ```
 
 4. Create a `.env.local` or `.env` file in the root directory and add your TNDB API key:
+   - Get the API KEY and Token for free [**TMDB API**](https://developer.themoviedb.org/docs/getting-started)
 
    ```
    NEXT_PUBLIC_BASEURL=http://localhost:3000
@@ -56,7 +57,7 @@ To run JC-Movies locally, follow these steps:
 5. Run the development server:
 
    ```
-   pnpm run dev
+   npm run dev or pnpm run dev
    ```
 
 6. Open your browser and visit `http://localhost:3000` to view JC-Movies.
