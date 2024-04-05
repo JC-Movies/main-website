@@ -13,6 +13,8 @@ export default async function handler(
   const destination = parsedUrl.query.destination; // Extract query parameter
 
   try {
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 2500);
     const response = await fetch(destination, {
       method,
       //@ts-expect-error
@@ -21,6 +23,7 @@ export default async function handler(
         "User-Agent": "Mozilla/5.0",
       },
       body: body ? JSON.stringify(body) : undefined,
+      signal: controller.signal
     });
     
     if (!response.ok) {

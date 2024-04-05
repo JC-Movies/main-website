@@ -50,7 +50,7 @@ function VideoPlayer({
 
   const [visible, setVisible] = useState(false);
   const languages = isoLangs;
-  const captions = ["en", "ar", "fr", "es", "nl", "de"]//Object.keys(languages).map((code) => code);
+  const captions = ["en", "ar", "fr", "es", "nl", "de"]
 
   const handleSeasonChange = (seasonNumber: string) => {
     if (!onSeasonChange) return;
@@ -113,7 +113,20 @@ function VideoPlayer({
         autoPlay
       >
         <MediaProvider />
-        {captions &&
+        {strm.captions && strm.captions.map((caption: any) => (
+          <Track
+            key={caption}
+            label={
+              convertLanguageCodeToName(caption.language) || caption.language
+            }
+            language={caption.language}
+            src={caption.url}
+            kind="captions"
+          />
+        ))
+
+        }
+        {captions && selectedEpisode &&
           captions.map((caption: any) => (
             <Track
               key={caption}

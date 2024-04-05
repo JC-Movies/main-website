@@ -151,8 +151,6 @@ const Page = ({ params, searchParams }: PageProps) => {
           },
           tmdbId: showDetails.id,
         },
-        sourceOrder: ["flixhq","primewire", "vidsrcto"],
-        // embedOrder: ["voe", "streamvid"],
       });
 
       if (output !== null) {

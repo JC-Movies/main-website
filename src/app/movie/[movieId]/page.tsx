@@ -70,7 +70,9 @@ const Page = ({ params }: PageProps) => {
   }, [media]);
   const streamChangeHandler = async () => {
     try {
+      let event;
         const output = await providers.runAll({
+          events: event,
           media: {
             type: "movie",
             title: showDetails.title,
@@ -78,10 +80,13 @@ const Page = ({ params }: PageProps) => {
             imdbId: showDetails.external_ids.imdb_id,
             tmdbId: showDetails.id,
           },
-          sourceOrder: ["vidsrc","flixhq"],
-        // embedOrder: ["voe", "streamvid"],
         });
-
+        //@ts-ignore
+        event?.on("update", () => {
+          if (output !== null) {
+            setVideoUrl(output);
+          }
+        })
         if (output !== null) {
           setVideoUrl(output);
         }
